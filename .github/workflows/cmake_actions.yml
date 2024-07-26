@@ -1,0 +1,48 @@
+# This starter workflow is for a CMake project running on multiple platforms. There is a different starter workflow if you just want a single platform.
+# See: https://github.com/actions/starter-workflows/blob/main/ci/cmake-single-platform.yml
+name: CMake on Linux and Windows
+
+on:
+  push:
+    branches: [ "main", "github_actions"]
+  pull_request:
+    branches: [ "main", "github_actions"]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+    
+      fail-fast: false
+
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        build_type: [Release]
+        c_compiler: [gcc]
+        include:
+          - os: windows-latest
+            c_compiler: gcc
+            cpp_compiler: g++
+          - os: ubuntu-latest
+            c_compiler: gcc
+            cpp_compiler: g++
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Create Build folder
+      run: mkdir build
+      
+
+    - name: Configure CMake
+      working-directory: ${{ github.worspace }}/build
+      run: cmake ..
+
+    - name: Build Cmake
+      working-directory: ${{ github.worspace }}/build
+      run: cmake --build .
+
+    - name: Test
+      working-directory: ${{ github.worspace }}/build
+      run: ./Debug/Test.exe
