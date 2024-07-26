@@ -51,9 +51,25 @@ public:
     }
 
 
+    void operator+=(const Vector3<T> &Right)
+    {
+        this->x += Right.x;
+        this->y += Right.y;
+        this->z += Right.z;
+    }
+
+
     Vector3<T> operator-(const Vector3<T> &Right) const
     {
         return Vector3<T>{this->x - Right.x, this->y - Right.y, this->z - Right.z};
+    }
+
+    
+    void operator-=(const Vector3<T> &Right)
+    {
+        this->x -= Right.x;
+        this->y -= Right.y;
+        this->z -= Right.z;
     }
 
 
@@ -62,6 +78,15 @@ public:
         return Vector3<T>{this->x * Argument, this->y * Argument, this->z * Argument};
     }
 
+
+    void operator*=(const T &Argument)
+    {
+        this->x *= Argument;
+        this->y *= Argument;
+        this->z *= Argument;
+    }
+
+
     /**
      * @warning NOT CHECKING DIVIDED BY ZERO
      */
@@ -69,4 +94,16 @@ public:
     {
         return Vector3<T>{this->x / Argument, this->y / Argument, this->z / Argument};
     }
+
+
+    /**
+     * @warning NOT CHECKING DIVIDED BY ZERO
+     */
+    void operator/=(const T &Argument)
+    {
+        this->x /= Argument;
+        this->y /= Argument;
+        this->z /= Argument;
+    }
+
 };
