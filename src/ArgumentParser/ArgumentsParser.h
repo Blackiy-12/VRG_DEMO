@@ -76,6 +76,9 @@ private:
         bool Weight = false;
         bool SimsStep = false;
 
+        /**
+         * @brief Check if all set to true
+         */
         bool isAllChecked()
         {
             return Start && Goal && Velocity && Weight && SimsStep;
