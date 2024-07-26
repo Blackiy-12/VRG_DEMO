@@ -28,6 +28,7 @@ add_executable(
     Tests
     ./test/main_test.cpp
     ./test/test_vec3_int.cpp
+    ./test/test_vec3_float.cpp
 )
 
 target_include_directories(
