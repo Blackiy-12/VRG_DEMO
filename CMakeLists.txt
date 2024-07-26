@@ -29,6 +29,8 @@ add_executable(
     ./test/main_test.cpp
     ./test/test_vec3_int.cpp
     ./test/test_vec3_float.cpp
+    ./test/test_arg_parser.cpp
+    ./src/ArgumentParser/ArgumentsParser.cpp
 )
 
 target_include_directories(
@@ -48,6 +50,7 @@ project(VRG_DEMO)
 add_executable(
     VRG_DEMO
     ./src/main.cpp
+    ./src/ArgumentParser/ArgumentsParser.cpp
 )
 
 target_include_directories(
