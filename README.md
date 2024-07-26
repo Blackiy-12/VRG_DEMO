@@ -1,2 +1,2 @@
 # VRG_DEMO
-Test task from VRG
+Test task for VRG
