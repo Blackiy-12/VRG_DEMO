@@ -29,4 +29,9 @@ jobs:
         run: cmake --build build
   
       - name: Test
-        run: ./build/Tests
+        run: | 
+          ./build/Tests
+          if [ $? -ne 0 ]; then
+            echo "Program exited with non-zero exit code"
+            exit 1
+          fi
