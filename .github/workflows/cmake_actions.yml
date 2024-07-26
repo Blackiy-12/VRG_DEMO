@@ -8,9 +8,10 @@ on:
   pull_request:
     branches: [ "main", "github_actions"]
 
-#Linux
 jobs:
-  build:
+
+  #Linux
+  build-linux:
     runs-on: ubuntu-latest
     
     steps:
@@ -32,6 +33,36 @@ jobs:
         run: | 
           ./build/Tests
           if [ $? -ne 0 ]; then
-            echo "Program exited with non-zero exit code"
+            echo "Tests exited with non-zero exit code"
             exit 1
           fi
+
+  #Windows
+  build:
+    runs-on: windows-lastest
+    
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          choco install cmake --installargs 'ADD_CMAKE_TO_PATH=System'
+          choco install mingw
+        
+      - name: Create Build folder
+        run: mkdir build
+        
+      - name: Configure CMake
+        run: cmake -G "MinGW Makefiles" -S . -B build
+  
+      - name: Build Cmake
+        run: cmake --build build
+  
+      - name: Test
+        run: | 
+          build\Tests.exe
+          if ($LASTEXITCODE -ne 0) {
+            Write-Host "Tests exited with non-zero exit code"
+            exit 1
+          }
+
