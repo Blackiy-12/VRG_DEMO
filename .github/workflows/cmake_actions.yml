@@ -1,0 +1,68 @@
+# This starter workflow is for a CMake project running on multiple platforms. There is a different starter workflow if you just want a single platform.
+# See: https://github.com/actions/starter-workflows/blob/main/ci/cmake-single-platform.yml
+name: CMake on Linux and Windows
+
+on:
+  push:
+    branches: [ "main", "github_actions"]
+  pull_request:
+    branches: [ "main", "github_actions"]
+
+jobs:
+
+  #Linux
+  build-linux:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y cmake g++ make
+        
+      - name: Create Build folder
+        run: mkdir build
+        
+      - name: Configure CMake
+        run: cmake -S . -B build
+  
+      - name: Build Cmake
+        run: cmake --build build
+  
+      - name: Test
+        run: | 
+          ./build/Tests
+          if [ $? -ne 0 ]; then
+            echo "Tests exited with non-zero exit code"
+            exit 1
+          fi
+
+  #Windows
+  build-windows:
+    runs-on: windows-lastest
+    
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          choco install cmake --installargs 'ADD_CMAKE_TO_PATH=System'
+          choco install mingw
+        
+      - name: Create Build folder
+        run: mkdir build
+        
+      - name: Configure CMake
+        run: cmake -G "MinGW Makefiles" -S . -B build
+  
+      - name: Build Cmake
+        run: cmake --build build
+  
+      - name: Test
+        run: | 
+          build\Tests.exe
+          if ($LASTEXITCODE -ne 0) {
+            Write-Host "Tests exited with non-zero exit code"
+            exit 1
+          }
+
