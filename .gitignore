@@ -32,6 +32,12 @@
 *.app
 
 
-# Build directory
+#VS Code
+.vscode
 
+
+# Build directory
 build
+
+# Thrid party 
+catch2
