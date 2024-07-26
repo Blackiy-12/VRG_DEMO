@@ -27,11 +27,13 @@ project(Tests)
 add_executable(
     Tests
     ./test/main_test.cpp
+    ./test/test_vec3_int.cpp
 )
 
 target_include_directories(
     Tests
     PRIVATE ${Catch2_DIR}/src
+    PRIVATE ./src
 )
 
 target_link_libraries(
