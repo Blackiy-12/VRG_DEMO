@@ -22,6 +22,17 @@ set("Catch2_DIR" ${CMAKE_SOURCE_DIR}/catch2)
 
 FetchContent_MakeAvailable(Catch2)
 
+FetchContent_Declare(
+    entt
+    GIT_REPOSITORY https://github.com/skypjack/entt.git
+    GIT_TAG master
+    SOURCE_DIR ${CMAKE_SOURCE_DIR}/entt
+)
+
+set("entt_DIR" ${CMAKE_SOURCE_DIR}/entt)
+
+FetchContent_MakeAvailable(entt)
+
 project(Tests)
 
 add_executable(
@@ -42,6 +53,7 @@ target_include_directories(
 target_link_libraries(
     Tests
     PRIVATE Catch2::Catch2WithMain
+    PRIVATE EnTT::EnTT
 )
 
 
@@ -56,4 +68,9 @@ add_executable(
 target_include_directories(
     VRG_DEMO
     PRIVATE ./src
+)
+
+target_link_libraries(
+    VRG_DEMO
+    PRIVATE EnTT::EnTT
 )
