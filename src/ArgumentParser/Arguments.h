@@ -16,4 +16,6 @@ struct Arguments
     float Weight = 0.0f;
 
     double SimStep = .0f;
+
+    bool WithAir = false; //TODO add later
 };

@@ -32,6 +32,7 @@ ParseResult ArgumentParser::parseArguments()
 {
     if(m_ArgumentCount < 2)
     {
+        m_LastError = "No arguments to parse";
         return USER_GIVE_ZERO_ARG;
     }
 
