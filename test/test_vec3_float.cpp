@@ -201,3 +201,80 @@ TEST_CASE("Vec3 float modify existed vector: div", "[vec3][vec3_float]")
     REQUIRE_THAT(Vector.y, WithinRel(0.6f, 0.0001f));
     REQUIRE_THAT(Vector.z, WithinRel(0.65f, 0.0001f));
 }
+
+
+TEST_CASE("Vec3 float cross function 1", "[vec3][vec3_float]")
+{
+    using namespace Catch::Matchers;
+    Vector3<float> Vector1{1.3f, 1.4f, 1.5f};
+    Vector3<float> Vector2{1.4f, 2.4f, 1.3f};
+
+    auto Result = cross(Vector1, Vector2);
+
+
+    REQUIRE_THAT(Result.x, WithinRel(-1.78f, 0.0001f));
+    REQUIRE_THAT(Result.y, WithinRel(0.41f, 0.0001f));
+    REQUIRE_THAT(Result.z, WithinRel(1.16f, 0.0001f));
+}
+
+
+TEST_CASE("Vec3 float cross function 2", "[vec3][vec3_float]")
+{
+    using namespace Catch::Matchers;
+    Vector3<float> Vector1{0.0f, 0.0f, 0.0f};
+    Vector3<float> Vector2{0.0f, 0.0f, 0.0f};
+
+    auto Result = cross(Vector1, Vector2);
+
+
+    REQUIRE_THAT(Result.x, WithinRel(0.0f, 0.0001f));
+    REQUIRE_THAT(Result.y, WithinRel(0.0f, 0.0001f));
+    REQUIRE_THAT(Result.z, WithinRel(0.0f, 0.0001f));
+}
+
+
+TEST_CASE("Vec3 float vector length 1", "[vec3][vec3_float]")
+{
+    using namespace Catch::Matchers;
+    Vector3<float> Vector1{0.0f, 0.0f, 0.0f};
+
+    REQUIRE_THAT(Vector1.getLength(), WithinRel(0.0f, 0.0001f));
+
+}
+
+
+TEST_CASE("Vec3 float vector length 2", "[vec3][vec3_float]")
+{
+    using namespace Catch::Matchers;
+    Vector3<float> Vector1{1.0f, 1.0f, 1.0f};
+
+    REQUIRE_THAT(Vector1.getLength(), WithinAbs(1.732f, 0.01f));
+}
+
+
+TEST_CASE("Vec3 float unit vector 1", "[vec3][vec3_float]")
+{
+
+    using namespace Catch::Matchers;
+    Vector3<float> Vector1{0.0f, 0.0f, 0.0f};
+
+    auto Result = Vector1.getUnitVector();
+
+    REQUIRE_THAT(Result.x, WithinRel(0.0f, 0.0001f));
+    REQUIRE_THAT(Result.y, WithinRel(0.0f, 0.0001f));
+    REQUIRE_THAT(Result.z, WithinRel(0.0f, 0.0001f));
+}
+
+
+TEST_CASE("Vec3 float unit vector 2", "[vec3][vec3_float]")
+{
+    using namespace Catch::Matchers;
+    Vector3<float> Vector1{1.0f, 1.0f, 1.0f};
+
+    auto Result = Vector1.getUnitVector();
+
+    REQUIRE_THAT(Result.x, WithinAbs(0.577f, 0.01f));
+    REQUIRE_THAT(Result.y, WithinAbs(0.577f, 0.01f));
+    REQUIRE_THAT(Result.z, WithinAbs(0.577f, 0.01f));
+
+}
