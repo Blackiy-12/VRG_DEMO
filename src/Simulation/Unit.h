@@ -16,7 +16,7 @@ struct Velocity
 
 struct Weight
 {
-    float KG;
+    const float KG;
 };
 
 
@@ -34,5 +34,14 @@ struct HitIndicator
 
 struct CollisionArea
 {
-    float Radius = 0.0f;
+    const float Radius = 0.0f;
+};
+
+
+struct Aerodynamic
+{
+    const float CrossSectionalArea = 0.0f; //m^2
+
+    const float DragCoefficient = 0.0f;
+
 };

@@ -8,7 +8,7 @@ class MovementSystem
 {
 
 public:
-    MovementSystem(std::shared_ptr<entt::registry> Registry, float Gravity = 9.8f);
+    MovementSystem(std::shared_ptr<entt::registry> Registry, float Gravity = 9.8f, float AirDensity = 1.2f);
 
     ~MovementSystem();
 
@@ -19,6 +19,8 @@ private:
     std::shared_ptr<entt::registry> m_Registry;
 
     float m_Gravity;
+
+    float m_AirDensity;
 
 private:
     bool checkCollision(int const ObjectID, Vector3<float> const PrevPosition, Vector3<float> const NextPosition) const;

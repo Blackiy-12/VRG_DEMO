@@ -2,8 +2,9 @@
 
 #include <Simulation/Unit.h>
 
-MovementSystem::MovementSystem(std::shared_ptr<entt::registry> Registry, float Gravity) :
-    m_Gravity(Gravity)
+MovementSystem::MovementSystem(std::shared_ptr<entt::registry> Registry, float Gravity, float AirDensity) :
+    m_Gravity(Gravity),
+    m_AirDensity(AirDensity)
 {
     m_Registry = Registry;
 }
@@ -57,8 +58,31 @@ void MovementSystem::step(double StepSize)
 
         //Update velocity
         {   
+
             if (ObjectPosition.y > 0.0f)
             {
+
+                auto ObjectWeight = m_Registry->try_get<Weight>(Object);
+
+                auto ObjectAerodynamic = m_Registry->try_get<Aerodynamic>(Object);
+
+                if (ObjectWeight != nullptr && ObjectAerodynamic != nullptr)
+                {
+                    if (ObjectWeight->KG == 0)
+                        break;
+
+
+                    float Constant = (powf(ObjectVelocity.getLength(), 2) * m_AirDensity * ObjectAerodynamic->CrossSectionalArea * ObjectAerodynamic->DragCoefficient) / 2.0f;
+
+                    Vector3<float> AirResistance = ObjectVelocity;
+
+                    AirResistance = AirResistance.getUnitVector();
+
+                    AirResistance *= -(1.0f * Constant) / ObjectWeight->KG;
+
+                    ObjectVelocity += AirResistance * static_cast<float>(StepSize);
+                }
+
                 ObjectVelocity.y = ObjectVelocity.y - m_Gravity * static_cast<float>(StepSize);
             }
             else
