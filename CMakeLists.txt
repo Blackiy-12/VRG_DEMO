@@ -41,7 +41,9 @@ add_executable(
     ./test/test_vec3_int.cpp
     ./test/test_vec3_float.cpp
     ./test/test_arg_parser.cpp
+    ./test/test_movement_system.cpp
     ./src/ArgumentParser/ArgumentsParser.cpp
+    ./src/Simulation/MovementSystem.cpp
 )
 
 target_include_directories(
@@ -63,6 +65,7 @@ add_executable(
     VRG_DEMO
     ./src/main.cpp
     ./src/ArgumentParser/ArgumentsParser.cpp
+    ./src/Simulation/MovementSystem.cpp
 )
 
 target_include_directories(
