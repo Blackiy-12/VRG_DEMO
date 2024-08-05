@@ -1,4 +1,5 @@
 #include <ArgumentParser/ArgumentsParser.h>
+#include <Simulation/Simulation.h>
 
 #include <iostream>
 #include <entt/entt.hpp>
@@ -15,6 +16,10 @@ int main(int argc, char** argv)
     }
 
     auto UserData = Parser.getParsedArguments();
+
+    Simulation Sim(UserData);
+
+    Sim.run();
     
     return 0;
 }

@@ -66,6 +66,7 @@ add_executable(
     ./src/main.cpp
     ./src/ArgumentParser/ArgumentsParser.cpp
     ./src/Simulation/MovementSystem.cpp
+    ./src/Simulation/Simulation.cpp
 )
 
 target_include_directories(
