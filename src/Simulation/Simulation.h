@@ -11,8 +11,13 @@ class Simulation
 public:
     Simulation(const Arguments& Data);
 
+
     ~Simulation();
 
+
+    /**
+     * @brief Run simulations 
+     */
     void run();
 
 private:
@@ -40,9 +45,22 @@ private:
     };
 
 
+    /**
+     * @brief run single simulation of movement system
+     * 
+     * @param Print True - print data to output; False - dont print
+     */
     SimulationResult runSimulation(bool Print);
 
+
+    /**
+     * @brief Clear all objects from registry
+     */
     void clearRegistry();
 
+
+    /**
+     * @brief Change velocity vector according to angle of shoot
+     */
     void countVelocityVector();
 };

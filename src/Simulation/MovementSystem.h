@@ -12,6 +12,11 @@ public:
 
     ~MovementSystem();
 
+    /**
+     * @brief simulation step. Update objects position and velocity
+     * 
+     * @param StepSize Delta time for simulation
+     */
     void step(double StepSize);
     
 private:
@@ -23,5 +28,13 @@ private:
     float m_AirDensity;
 
 private:
+
+    /**
+     * @brief Check collision with Object with others objects with collision area
+     * 
+     * @param ObjectID ID of object
+     * @param PrevPosition Start of line
+     * @param NextPosition End of line
+     */
     bool checkCollision(int const ObjectID, Vector3<float> const PrevPosition, Vector3<float> const NextPosition) const;
 };
